@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e9ecef;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1400px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        /* Back to Home Button */
+        .back-home {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .back-home:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 40%;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-right: 1px solid #dee2e6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #495057;
+        }
+        .patient-list {
+            list-style: none;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .patient-item {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .patient-item:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+        }
+        .delete-btn {
+            background-color: #ff6f61;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .delete-btn:hover {
+            background-color: #e55347;
+        }
+        .empty-message {
+            text-align: center;
+            color: #6c757d;
+            margin-top: 20px;
+        }
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .content h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #495057;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #495057;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .details {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Home Button -->
+    <a href="home.html" class="back-home">Back to Home</a>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div>
+                <h2>Patient List</h2>
+                <ul class="patient-list" id="patientList" aria-live="polite">
+                    <p class="empty-message" id="emptyMessage">No patients added yet.</p>
+                </ul>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="content">
+            <h2>Add Patient</h2>
+            <form id="patientForm">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter full name" required>
+
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" required>
+
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="strand">Strand</label>
+                <input type="text" id="strand" placeholder="e.g., STEM, HUMSS" required>
+
+                <label for="gradeSection">Grade and Section</label>
+                <input type="text" id="gradeSection" placeholder="e.g., 12-A" required>
+
+                <label for="conditions">Conditions</label>
+                <textarea id="conditions" rows="3" placeholder="Enter any health conditions"></textarea>
+
+                <button type="submit">Add Patient</button>
+            </form>
+
+            <div class="details" id="patientDetails">
+                <h3>Patient Details</h3>
+                <p id="detailsContent">Select a patient to view their details.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const patientList = document.getElementById('patientList');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const patientForm = document.getElementById('patientForm');
+        const patientDetails = document.getElementById('patientDetails');
+        const detailsContent = document.getElementById('detailsContent');
+
+        let patients = [];
+
+        function renderPatientList() {
+            patientList.innerHTML = '';
+            if (patients.length === 0) {
+                emptyMessage.style.display = 'block';
+            } else {
+                emptyMessage.style.display = 'none';
+                patients.forEach((patient, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'patient-item';
+                    li.innerHTML = `
+                        <span>${patient.name}</span>
+                        <button class="delete-btn" onclick="deletePatient(${index})">Delete</button>
+                    `;
+                    li.onclick = () => viewDetails(index);
+                    patientList.appendChild(li);
+                });
+            }
+        }
+
+        patientForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const gender = document.getElementById('gender').value;
+            const strand = document.getElementById('strand').value;
+            const gradeSection = document.getElementById('gradeSection').value;
+            const conditions = document.getElementById('conditions').value;
+
+            patients.push({ name, dob, gender, strand, gradeSection, conditions });
+            renderPatientList();
+            patientForm.reset();
+        });
+
+        function deletePatient(index) {
+            patients.splice(index, 1);
+            renderPatientList();
+            detailsContent.innerText = 'Select a patient to view their details.';
+        }
+
+        function viewDetails(index) {
+            const patient = patients[index];
+            detailsContent.innerHTML = `
+                <p><strong>Name:</strong> ${patient.name}</p>
+                <p><strong>Date of Birth:</strong> ${patient.dob}</p>
+                <p><strong>Gender:</strong> ${patient.gender}</p>
+                <p><strong>Strand:</strong> ${patient.strand}</p>
+                <p><strong>Grade and Section:</strong> ${patient.gradeSection}</p>
+                <p><strong>Conditions:</strong> ${patient.conditions || 'None'}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

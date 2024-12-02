@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanauan Institute, Inc. - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <img src="TIlogo2.png" height="150" alt="Clinic Logo" class="logo">
+    <h1>Tanauan Institute, Inc.</h1>
+    <h2>Clinic Medical Records</h2>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="patient.html">Patient Records</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section id="welcome">
+        <h2>Welcome to Our Clinic</h2>
+        <p>Your health is our priority. Please use the navigation to access different sections of our site.</p>
+        <button id="termsBtn">View Terms and Conditions</button>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Comprehensive Medical Check-ups</li>
+            <li>Vaccination Programs</li>
+            <li>Laboratory Tests</li>
+            <li>Specialist Consultations</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions, feel free to reach out!</p>
+        <p>Email: info@tanauanclinic.com</p>
+        <p>Phone: +63 123 456 7890</p>
+    </section>
+</main>
+
+<!-- Terms and Conditions Popup -->
+<div class="popup-overlay" id="popupOverlay"></div>
+<div class="popup" id="popup">
+    <h2>Terms and Conditions</h2>
+    <p>We fully recognize your fundamental right to privacy. We treat your personal information in full confidentiality and with strict adherence to the fundamental principles of privacy as required by Data Protection Laws, such as Republic Act No. 10173 (Philippine Data Privacy Act of 2012), and its implementing rules and regulations.
+
+        Please take time to read these Terms and Conditions on how we process your personal and medical information. As used in this agreement, the term “personal information” includes “sensitive personal information” and “medical information.”
+        
+        ---
+        
+        I. How We Collect Your Personal Data and What We Collect
+        
+        As you use our website, we collect the data you directly supply to us through our registration process. We do not collect or process any other data from third-party websites, institutions, or agencies.
+        
+        You are not required to provide us with your personal and medical information. However, not accepting our Terms and Conditions will prohibit you from fully utilizing the website. If you choose to provide information, you agree and freely consent that the information you provide will be collected, utilized, processed, and stored in our databases in accordance with Republic Act No. 10173, otherwise known as the Data Privacy Act of 2012.
+        
+        ---
+        
+        II. Use of Your Personal Information
+        
+        We use your personal and medical information for documentation and processing purposes mentioned below, and for other specific purposes in relation to your inquiry or request.
+        
+        ---
+        
+        III. Purpose of Collecting Your Personal Information
+        
+        We collect your personal and medical information to identify you, contact you, provide accurate information about your health, and to have an efficient and faster way to provide medical services inside the school premises.
+        
+        The information we collect includes specific details such as:
+        - NAME, AGE, GRADE LEVEL, CURRENT STRAND: for identification
+        - MEDICAL INFORMATION (such as allergies, past diagnosis, and current/past health conditions): to provide necessary assistance
+        - ADDRESS, CONTACT NUMBER, and EMAIL ADDRESS: to contact you and respond to inquiries
+        
+        ---
+        
+        IV. To Whom We Disclose or Share Your Personal Information
+        
+        We use your personal information within the School Clinic of Tanauan Institute Inc., accessible only by the Clinic staff and the School President. 
+        
+        We value your rights as data subjects under the data privacy laws. Rest assured that your personal information and sensitive medical information are handled with the utmost care and confidentiality.
+        
+        We do not share or transfer your personal information with any other organization, website, or institution unless requested by you.
+        
+        ---
+        
+        V. Your Rights as a User
+        
+        We make sure you are fully aware of all your data protection rights. You have the right to be informed, right to access, right to object, right to erasure or blocking, right to damages, right to file a complaint, right to rectify, and right to data portability.
+        
+        ---
+        
+        VI. Risks Involved
+        
+        We recognize the risks involved in the processing of personal information, such as, but not limited to, exposure to malware, ransomware, computer viruses, or unauthorized access.
+        
+        However, we are implementing appropriate physical and technical security measures to ensure that any risk for personal data breach is mitigated, if not completely avoided.</p>
+        
+        <button id="acceptBtn">Accept</button>
+        <button id="declineBtn">Decline</button>
+</div>
+
+<script>
+    // Show the popup automatically when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('popupOverlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+    });
+
+    // Close popup function
+    function closePopup() {
+        document.getElementById('popupOverlay').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    // Close the popup on "Accept" button click
+    document.getElementById('acceptBtn').addEventListener('click', function() {
+        closePopup();
+        window.location.href = 'register.html'; // Redirect to Register page
+    });
+
+    // Close the popup on "Decline" button click
+    document.getElementById('declineBtn').addEventListener('click', function() {
+        closePopup();
+        window.location.href = 'home.html'; // Redirect to Home page
+    });
+
+    // Close the popup when the close button is clicked
+    document.getElementById('closeBtn').addEventListener('click', closePopup);
+
+    // Close the popup when clicking outside the popup
+    document.getElementById('popupOverlay').addEventListener('click', closePopup);
+</script>
+
+</body>
+</html>
